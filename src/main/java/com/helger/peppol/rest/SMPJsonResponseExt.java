@@ -21,9 +21,9 @@ import java.util.Map;
 import com.helger.annotation.concurrent.Immutable;
 import com.helger.json.IJsonArray;
 import com.helger.json.IJsonObject;
-import com.helger.peppol.domain.NiceNameEntry;
+import com.helger.peppol.photon.nicename.NiceNameEntry;
+import com.helger.peppol.photon.nicename.NiceNameManager;
 import com.helger.peppol.sml.ESMPAPIType;
-import com.helger.peppol.ui.AppCommonUI;
 import com.helger.peppolid.IParticipantIdentifier;
 import com.helger.peppolid.factory.IIdentifierFactory;
 import com.helger.smpclient.json.SMPJsonResponse;
@@ -57,7 +57,7 @@ public final class SMPJsonResponseExt
         final String sDocType = aUrlEntry.getAsString (SMPJsonResponse.JSON_DOCUMENT_TYPE_ID);
         if (sDocType != null)
         {
-          final NiceNameEntry aNN = AppCommonUI.getDocTypeName (sDocType);
+          final NiceNameEntry aNN = NiceNameManager.docTypeNames ().get (sDocType);
           if (aNN != null)
           {
             aUrlEntry.add (JSON_NICE_NAME, aNN.getName ());
