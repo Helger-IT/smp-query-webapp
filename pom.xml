@@ -172,6 +172,10 @@
       <groupId>com.helger.peppol.ui</groupId>
       <artifactId>ph-oton-peppol</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.helger.peppol.ui</groupId>
+      <artifactId>peppol-shared-api</artifactId>
+    </dependency>
    
     <dependency>
       <groupId>com.sun.xml.bind</groupId>

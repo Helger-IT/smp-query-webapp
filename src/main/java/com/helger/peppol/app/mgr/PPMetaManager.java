@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 
 import com.helger.annotation.style.UsedViaReflection;
 import com.helger.base.exception.InitializationException;
-import com.helger.dao.DAOException;
 import com.helger.scope.IScope;
 import com.helger.scope.singleton.AbstractGlobalSingleton;
 
@@ -34,11 +33,7 @@ import jakarta.annotation.Nonnull;
  */
 public final class PPMetaManager extends AbstractGlobalSingleton
 {
-  private static final String SML_INFO_XML = "sml-info.xml";
-
   private static final Logger LOGGER = LoggerFactory.getLogger (PPMetaManager.class);
-
-  private SMLConfigurationManager m_aSMLConfigurationMgr;
 
   @Deprecated
   @UsedViaReflection
@@ -50,12 +45,9 @@ public final class PPMetaManager extends AbstractGlobalSingleton
   {
     try
     {
-      // Before TestEndpoint manager!
-      m_aSMLConfigurationMgr = new SMLConfigurationManager (SML_INFO_XML);
-
       LOGGER.info ("MetaManager was initialized");
     }
-    catch (final DAOException ex)
+    catch (final Exception ex)
     {
       throw new InitializationException ("Failed to init MetaManager", ex);
     }
@@ -65,11 +57,5 @@ public final class PPMetaManager extends AbstractGlobalSingleton
   public static PPMetaManager getInstance ()
   {
     return getGlobalSingleton (PPMetaManager.class);
-  }
-
-  @Nonnull
-  public static ISMLConfigurationManager getSMLConfigurationMgr ()
-  {
-    return getInstance ().m_aSMLConfigurationMgr;
   }
 }

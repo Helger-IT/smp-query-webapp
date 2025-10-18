@@ -38,13 +38,15 @@ import com.helger.httpclient.HttpClientManager;
 import com.helger.httpclient.response.ResponseHandlerByteArray;
 import com.helger.json.IJsonObject;
 import com.helger.json.JsonObject;
+import com.helger.peppol.api.json.PeppolSharedSMPJsonHelper;
+import com.helger.peppol.api.rest.APIParamException;
 import com.helger.peppol.app.CPPApp;
-import com.helger.peppol.app.mgr.ISMLConfigurationManager;
-import com.helger.peppol.app.mgr.PPMetaManager;
 import com.helger.peppol.businesscard.generic.PDBusinessCard;
 import com.helger.peppol.businesscard.helper.PDBusinessCardHelper;
-import com.helger.peppol.domain.ISMLConfiguration;
 import com.helger.peppol.domain.SMPQueryParams;
+import com.helger.peppol.photon.mgr.PhotonPeppolMetaManager;
+import com.helger.peppol.photon.smlconfig.ISMLConfiguration;
+import com.helger.peppol.photon.smlconfig.ISMLConfigurationManager;
 import com.helger.peppol.sml.ESMPAPIType;
 import com.helger.peppolid.CIdentifier;
 import com.helger.peppolid.IParticipantIdentifier;
@@ -59,7 +61,7 @@ import com.helger.web.scope.IRequestWebScopeWithoutResponse;
 
 import jakarta.annotation.Nonnull;
 
-public final class APISMPQueryGetDocTypes extends AbstractAPIExecutor
+public final class APISMPQueryGetDocTypes extends AbstractAppAPIExecutor
 {
   public static final String PARAM_VERIFY_SIGNATURE = "verifySignature";
   public static final String PARAM_XML_SCHEMA_VALIDATION = "xmlSchemaValidation";
@@ -68,15 +70,14 @@ public final class APISMPQueryGetDocTypes extends AbstractAPIExecutor
   private static final Logger LOGGER = LoggerFactory.getLogger (APISMPQueryGetDocTypes.class);
 
   @Override
-  protected void invokeAPI (@Nonnull final IAPIDescriptor aAPIDescriptor,
+  protected void invokeAPI (@Nonnull @Nonempty final String sLogPrefix,
+                            @Nonnull final IAPIDescriptor aAPIDescriptor,
                             @Nonnull @Nonempty final String sPath,
                             @Nonnull final Map <String, String> aPathVariables,
                             @Nonnull final IRequestWebScopeWithoutResponse aRequestScope,
                             @Nonnull final PhotonUnifiedResponse aUnifiedResponse) throws Exception
   {
-    final String sLogPrefix = "[API GetDT-" + COUNTER.incrementAndGet () + "] ";
-
-    final ISMLConfigurationManager aSMLConfigurationMgr = PPMetaManager.getSMLConfigurationMgr ();
+    final ISMLConfigurationManager aSMLConfigurationMgr = PhotonPeppolMetaManager.getSMLConfigurationMgr ();
     final String sSMLID = aPathVariables.get (PPAPI.PARAM_SML_ID);
     final boolean bSMLAutoDetect = ISMLConfigurationManager.ID_AUTO_DETECT.equals (sSMLID);
     ISMLConfiguration aSML = aSMLConfigurationMgr.getSMLInfoOfID (sSMLID);
@@ -152,7 +153,7 @@ public final class APISMPQueryGetDocTypes extends AbstractAPIExecutor
       {
         final SMPClientReadOnly aSMPClient = new SMPClientReadOnly (aSMPQueryParams.getSMPHostURI ());
         aSMPClient.setSecureValidation (CPPApp.DEFAULT_SECURE_VALIDATION);
-        aSMPClient.withHttpClientSettings (SMP_HCS_MODIFIER);
+        aSMPClient.withHttpClientSettings (m_aHCSModifier);
         aSMPClient.setXMLSchemaValidation (bXMLSchemaValidation);
         aSMPClient.setVerifySignature (bVerifySignature);
 
@@ -178,7 +179,7 @@ public final class APISMPQueryGetDocTypes extends AbstractAPIExecutor
         aSGHrefs = new CommonsTreeMap <> ();
         final BDXRClientReadOnly aBDXR1Client = new BDXRClientReadOnly (aSMPQueryParams.getSMPHostURI ());
         aBDXR1Client.setSecureValidation (CPPApp.DEFAULT_SECURE_VALIDATION);
-        aBDXR1Client.withHttpClientSettings (SMP_HCS_MODIFIER);
+        aBDXR1Client.withHttpClientSettings (m_aHCSModifier);
         aBDXR1Client.setXMLSchemaValidation (bXMLSchemaValidation);
         aBDXR1Client.setVerifySignature (bVerifySignature);
 
@@ -204,13 +205,13 @@ public final class APISMPQueryGetDocTypes extends AbstractAPIExecutor
     IJsonObject aJson = null;
     if (aSGHrefs != null)
     {
-      aJson = SMPJsonResponseExt.convert (eAPIType, aParticipantID, aSGHrefs, aIF);
+      aJson = PeppolSharedSMPJsonHelper.convert (eAPIType, aParticipantID, aSGHrefs, aIF);
     }
 
     if (bQueryBusinessCard)
     {
       final SMPHttpClientSettings aHCS = new SMPHttpClientSettings ();
-      SMP_HCS_MODIFIER.accept (aHCS);
+      m_aHCSModifier.accept (aHCS);
 
       final String sBCURL = StringHelper.trimEnd (aSMPQueryParams.getSMPHostURI ().toString (), '/') +
                             "/businesscard/" +

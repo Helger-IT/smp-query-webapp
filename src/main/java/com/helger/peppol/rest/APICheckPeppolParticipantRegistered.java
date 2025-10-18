@@ -10,9 +10,10 @@ import org.slf4j.LoggerFactory;
 import com.helger.annotation.Nonempty;
 import com.helger.http.CHttp;
 import com.helger.mime.CMimeType;
-import com.helger.peppol.app.mgr.ISMLConfigurationManager;
-import com.helger.peppol.app.mgr.PPMetaManager;
-import com.helger.peppol.domain.ISMLConfiguration;
+import com.helger.peppol.api.rest.APIParamException;
+import com.helger.peppol.photon.mgr.PhotonPeppolMetaManager;
+import com.helger.peppol.photon.smlconfig.ISMLConfiguration;
+import com.helger.peppol.photon.smlconfig.ISMLConfigurationManager;
 import com.helger.peppolid.CIdentifier;
 import com.helger.peppolid.IParticipantIdentifier;
 import com.helger.peppolid.factory.PeppolIdentifierFactory;
@@ -30,7 +31,7 @@ import jakarta.annotation.Nonnull;
  *
  * @author Philip Helger
  */
-public final class APICheckPeppolParticipantRegistered extends AbstractAPIExecutor
+public final class APICheckPeppolParticipantRegistered extends AbstractAppAPIExecutor
 {
   private static final Logger LOGGER = LoggerFactory.getLogger (APICheckPeppolParticipantRegistered.class);
 
@@ -52,15 +53,14 @@ public final class APICheckPeppolParticipantRegistered extends AbstractAPIExecut
   }
 
   @Override
-  public void invokeAPI (@Nonnull final IAPIDescriptor aAPIDescriptor,
+  public void invokeAPI (@Nonnull @Nonempty final String sLogPrefix,
+                         @Nonnull final IAPIDescriptor aAPIDescriptor,
                          @Nonnull @Nonempty final String sPath,
                          @Nonnull final Map <String, String> aPathVariables,
                          @Nonnull final IRequestWebScopeWithoutResponse aRequestScope,
                          @Nonnull final PhotonUnifiedResponse aUnifiedResponse) throws IOException
   {
-    final String sLogPrefix = "[API IsInPeppol-" + COUNTER.incrementAndGet () + "] ";
-
-    final ISMLConfigurationManager aSMLConfigurationMgr = PPMetaManager.getSMLConfigurationMgr ();
+    final ISMLConfigurationManager aSMLConfigurationMgr = PhotonPeppolMetaManager.getSMLConfigurationMgr ();
     final String sSMLID = aPathVariables.get (PPAPI.PARAM_SML_ID);
     final boolean bSMLAutoDetect = ISMLConfigurationManager.ID_AUTO_DETECT.equals (sSMLID);
     final ISMLConfiguration aSML = aSMLConfigurationMgr.getSMLInfoOfID (sSMLID);

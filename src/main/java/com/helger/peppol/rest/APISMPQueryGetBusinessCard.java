@@ -35,12 +35,13 @@ import com.helger.http.CHttp;
 import com.helger.httpclient.HttpClientManager;
 import com.helger.httpclient.response.ResponseHandlerByteArray;
 import com.helger.json.IJsonObject;
-import com.helger.peppol.app.mgr.ISMLConfigurationManager;
-import com.helger.peppol.app.mgr.PPMetaManager;
+import com.helger.peppol.api.rest.APIParamException;
 import com.helger.peppol.businesscard.generic.PDBusinessCard;
 import com.helger.peppol.businesscard.helper.PDBusinessCardHelper;
-import com.helger.peppol.domain.ISMLConfiguration;
 import com.helger.peppol.domain.SMPQueryParams;
+import com.helger.peppol.photon.mgr.PhotonPeppolMetaManager;
+import com.helger.peppol.photon.smlconfig.ISMLConfiguration;
+import com.helger.peppol.photon.smlconfig.ISMLConfigurationManager;
 import com.helger.peppolid.IParticipantIdentifier;
 import com.helger.peppolid.factory.SimpleIdentifierFactory;
 import com.helger.photon.api.IAPIDescriptor;
@@ -50,20 +51,19 @@ import com.helger.web.scope.IRequestWebScopeWithoutResponse;
 
 import jakarta.annotation.Nonnull;
 
-public final class APISMPQueryGetBusinessCard extends AbstractAPIExecutor
+public final class APISMPQueryGetBusinessCard extends AbstractAppAPIExecutor
 {
   private static final Logger LOGGER = LoggerFactory.getLogger (APISMPQueryGetBusinessCard.class);
 
   @Override
-  protected void invokeAPI (@Nonnull final IAPIDescriptor aAPIDescriptor,
+  protected void invokeAPI (@Nonnull @Nonempty final String sLogPrefix,
+                            @Nonnull final IAPIDescriptor aAPIDescriptor,
                             @Nonnull @Nonempty final String sPath,
                             @Nonnull final Map <String, String> aPathVariables,
                             @Nonnull final IRequestWebScopeWithoutResponse aRequestScope,
                             @Nonnull final PhotonUnifiedResponse aUnifiedResponse) throws Exception
   {
-    final String sLogPrefix = "[API GetBC-" + COUNTER.incrementAndGet () + "] ";
-
-    final ISMLConfigurationManager aSMLConfigurationMgr = PPMetaManager.getSMLConfigurationMgr ();
+    final ISMLConfigurationManager aSMLConfigurationMgr = PhotonPeppolMetaManager.getSMLConfigurationMgr ();
     final String sSMLID = aPathVariables.get (PPAPI.PARAM_SML_ID);
     final boolean bSMLAutoDetect = ISMLConfigurationManager.ID_AUTO_DETECT.equals (sSMLID);
     ISMLConfiguration aSML = aSMLConfigurationMgr.getSMLInfoOfID (sSMLID);
@@ -130,7 +130,7 @@ public final class APISMPQueryGetBusinessCard extends AbstractAPIExecutor
     byte [] aBCBytes;
 
     final SMPHttpClientSettings aHCS = new SMPHttpClientSettings ();
-    SMP_HCS_MODIFIER.accept (aHCS);
+    m_aHCSModifier.accept (aHCS);
 
     try (final HttpClientManager aHttpClientMgr = HttpClientManager.create (aHCS))
     {

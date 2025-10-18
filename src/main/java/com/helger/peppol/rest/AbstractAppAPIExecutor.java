@@ -16,10 +16,14 @@
  */
 package com.helger.peppol.rest;
 
-public class APIParamException extends RuntimeException
+import com.helger.peppol.api.rest.AbstractAPIExecutor;
+
+public abstract class AbstractAppAPIExecutor extends AbstractAPIExecutor
 {
-  public APIParamException (final String sMsg)
+  protected static final String USER_AGENT = "Helger-IT-SMP-Query-WebApp/1.0 (https://github.com/Helger-IT/smp-query-webapp)";
+
+  protected AbstractAppAPIExecutor ()
   {
-    super (sMsg);
+    super (USER_AGENT);
   }
 }

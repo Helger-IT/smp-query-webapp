@@ -30,11 +30,12 @@ import com.helger.base.timing.StopWatch;
 import com.helger.datetime.helper.PDTFactory;
 import com.helger.http.CHttp;
 import com.helger.json.IJsonObject;
+import com.helger.peppol.api.rest.APIParamException;
 import com.helger.peppol.app.CPPApp;
-import com.helger.peppol.app.mgr.ISMLConfigurationManager;
-import com.helger.peppol.app.mgr.PPMetaManager;
-import com.helger.peppol.domain.ISMLConfiguration;
 import com.helger.peppol.domain.SMPQueryParams;
+import com.helger.peppol.photon.mgr.PhotonPeppolMetaManager;
+import com.helger.peppol.photon.smlconfig.ISMLConfiguration;
+import com.helger.peppol.photon.smlconfig.ISMLConfigurationManager;
 import com.helger.peppolid.IDocumentTypeIdentifier;
 import com.helger.peppolid.IParticipantIdentifier;
 import com.helger.peppolid.factory.SimpleIdentifierFactory;
@@ -48,7 +49,7 @@ import com.helger.web.scope.IRequestWebScopeWithoutResponse;
 
 import jakarta.annotation.Nonnull;
 
-public final class APISMPQueryGetServiceInformation extends AbstractAPIExecutor
+public final class APISMPQueryGetServiceInformation extends AbstractAppAPIExecutor
 {
   public static final String PARAM_VERIFY_SIGNATURE = "verifySignature";
   public static final String PARAM_XML_SCHEMA_VALIDATION = "xmlSchemaValidation";
@@ -56,15 +57,14 @@ public final class APISMPQueryGetServiceInformation extends AbstractAPIExecutor
   private static final Logger LOGGER = LoggerFactory.getLogger (APISMPQueryGetServiceInformation.class);
 
   @Override
-  protected void invokeAPI (@Nonnull final IAPIDescriptor aAPIDescriptor,
+  protected void invokeAPI (@Nonnull @Nonempty final String sLogPrefix,
+                            @Nonnull final IAPIDescriptor aAPIDescriptor,
                             @Nonnull @Nonempty final String sPath,
                             @Nonnull final Map <String, String> aPathVariables,
                             @Nonnull final IRequestWebScopeWithoutResponse aRequestScope,
                             @Nonnull final PhotonUnifiedResponse aUnifiedResponse) throws Exception
   {
-    final String sLogPrefix = "[API GetSI-" + COUNTER.incrementAndGet () + "] ";
-
-    final ISMLConfigurationManager aSMLConfigurationMgr = PPMetaManager.getSMLConfigurationMgr ();
+    final ISMLConfigurationManager aSMLConfigurationMgr = PhotonPeppolMetaManager.getSMLConfigurationMgr ();
     final String sSMLID = aPathVariables.get (PPAPI.PARAM_SML_ID);
     final boolean bSMLAutoDetect = ISMLConfigurationManager.ID_AUTO_DETECT.equals (sSMLID);
     ISMLConfiguration aSML = aSMLConfigurationMgr.getSMLInfoOfID (sSMLID);
@@ -149,7 +149,7 @@ public final class APISMPQueryGetServiceInformation extends AbstractAPIExecutor
       {
         final SMPClientReadOnly aSMPClient = new SMPClientReadOnly (aSMPQueryParams.getSMPHostURI ());
         aSMPClient.setSecureValidation (CPPApp.DEFAULT_SECURE_VALIDATION);
-        aSMPClient.withHttpClientSettings (SMP_HCS_MODIFIER);
+        aSMPClient.withHttpClientSettings (m_aHCSModifier);
         aSMPClient.setXMLSchemaValidation (bXMLSchemaValidation);
         aSMPClient.setVerifySignature (bVerifySignature);
 
@@ -166,7 +166,7 @@ public final class APISMPQueryGetServiceInformation extends AbstractAPIExecutor
       {
         final BDXRClientReadOnly aBDXR1Client = new BDXRClientReadOnly (aSMPQueryParams.getSMPHostURI ());
         aBDXR1Client.setSecureValidation (CPPApp.DEFAULT_SECURE_VALIDATION);
-        aBDXR1Client.withHttpClientSettings (SMP_HCS_MODIFIER);
+        aBDXR1Client.withHttpClientSettings (m_aHCSModifier);
         aBDXR1Client.setXMLSchemaValidation (bXMLSchemaValidation);
         aBDXR1Client.setVerifySignature (bVerifySignature);
 
@@ -183,7 +183,7 @@ public final class APISMPQueryGetServiceInformation extends AbstractAPIExecutor
       {
         final BDXR2ClientReadOnly aBDXR2Client = new BDXR2ClientReadOnly (aSMPQueryParams.getSMPHostURI ());
         aBDXR2Client.setSecureValidation (CPPApp.DEFAULT_SECURE_VALIDATION);
-        aBDXR2Client.withHttpClientSettings (SMP_HCS_MODIFIER);
+        aBDXR2Client.withHttpClientSettings (m_aHCSModifier);
         aBDXR2Client.setXMLSchemaValidation (bXMLSchemaValidation);
         aBDXR2Client.setVerifySignature (bVerifySignature);
 
