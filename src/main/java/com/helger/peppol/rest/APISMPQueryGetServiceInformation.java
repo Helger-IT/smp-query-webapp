@@ -31,11 +31,12 @@ import com.helger.datetime.helper.PDTFactory;
 import com.helger.http.CHttp;
 import com.helger.json.IJsonObject;
 import com.helger.peppol.api.rest.APIParamException;
+import com.helger.peppol.api.rest.PeppolSharedRestAPI;
 import com.helger.peppol.app.CPPApp;
-import com.helger.peppol.domain.SMPQueryParams;
 import com.helger.peppol.photon.mgr.PhotonPeppolMetaManager;
 import com.helger.peppol.photon.smlconfig.ISMLConfiguration;
 import com.helger.peppol.photon.smlconfig.ISMLConfigurationManager;
+import com.helger.peppol.photon.smp.SMPQueryParams;
 import com.helger.peppolid.IDocumentTypeIdentifier;
 import com.helger.peppolid.IParticipantIdentifier;
 import com.helger.peppolid.factory.SimpleIdentifierFactory;
@@ -65,18 +66,18 @@ public final class APISMPQueryGetServiceInformation extends AbstractAppAPIExecut
                             @Nonnull final PhotonUnifiedResponse aUnifiedResponse) throws Exception
   {
     final ISMLConfigurationManager aSMLConfigurationMgr = PhotonPeppolMetaManager.getSMLConfigurationMgr ();
-    final String sSMLID = aPathVariables.get (PPAPI.PARAM_SML_ID);
+    final String sSMLID = aPathVariables.get (PeppolSharedRestAPI.PARAM_SML_ID);
     final boolean bSMLAutoDetect = ISMLConfigurationManager.ID_AUTO_DETECT.equals (sSMLID);
     ISMLConfiguration aSML = aSMLConfigurationMgr.getSMLInfoOfID (sSMLID);
     if (aSML == null && !bSMLAutoDetect)
       throw new APIParamException ("Unsupported SML ID '" + sSMLID + "' provided.");
 
-    final String sParticipantID = aPathVariables.get (PPAPI.PARAM_PARTICIPANT_ID);
+    final String sParticipantID = aPathVariables.get (PeppolSharedRestAPI.PARAM_PARTICIPANT_ID);
     final IParticipantIdentifier aPID = SimpleIdentifierFactory.INSTANCE.parseParticipantIdentifier (sParticipantID);
     if (aPID == null)
       throw new APIParamException ("Invalid participant ID '" + sParticipantID + "' provided.");
 
-    final String sDocTypeID = aPathVariables.get (PPAPI.PARAM_DOCTYPE_ID);
+    final String sDocTypeID = aPathVariables.get (PeppolSharedRestAPI.PARAM_DOCTYPE_ID);
     final IDocumentTypeIdentifier aDTID = SimpleIdentifierFactory.INSTANCE.parseDocumentTypeIdentifier (sDocTypeID);
     if (aDTID == null)
       throw new APIParamException ("Invalid document type ID '" + sDocTypeID + "' provided.");
@@ -92,7 +93,11 @@ public final class APISMPQueryGetServiceInformation extends AbstractAppAPIExecut
     {
       for (final ISMLConfiguration aCurSML : aSMLConfigurationMgr.getAllSorted ())
       {
-        aSMPQueryParams = SMPQueryParams.createForSMLOrNull (aCurSML, aPID.getScheme (), aPID.getValue (), false);
+        aSMPQueryParams = SMPQueryParams.createForSMLOrNull (aCurSML,
+                                                             aPID.getScheme (),
+                                                             aPID.getValue (),
+                                                             false,
+                                                             false);
         if (aSMPQueryParams != null && aSMPQueryParams.isSMPRegisteredInDNS ())
         {
           // Found it
@@ -110,7 +115,7 @@ public final class APISMPQueryGetServiceInformation extends AbstractAppAPIExecut
     }
     else
     {
-      aSMPQueryParams = SMPQueryParams.createForSMLOrNull (aSML, aPID.getScheme (), aPID.getValue (), true);
+      aSMPQueryParams = SMPQueryParams.createForSMLOrNull (aSML, aPID.getScheme (), aPID.getValue (), false, true);
     }
     if (aSMPQueryParams == null)
       throw new APIParamException ("Failed to resolve participant ID '" +

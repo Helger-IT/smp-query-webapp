@@ -21,12 +21,12 @@ import org.slf4j.bridge.SLF4JBridgeHandler;
 import com.helger.commons.vendor.VendorInfo;
 import com.helger.dns.config.DNSConfig;
 import com.helger.httpclient.HttpDebugger;
+import com.helger.peppol.api.ajax.CPeppolSharedAjax;
 import com.helger.peppol.app.AppConfig;
 import com.helger.peppol.app.AppInternalErrorHandler;
 import com.helger.peppol.app.AppSecurity;
 import com.helger.peppol.app.CPPApp;
-import com.helger.peppol.app.ajax.CAjax;
-import com.helger.peppol.app.mgr.PPMetaManager;
+import com.helger.peppol.photon.mgr.PhotonPeppolMetaManager;
 import com.helger.peppol.pub.MenuPublic;
 import com.helger.peppol.rest.PPAPI;
 import com.helger.peppol.secure.MenuSecure;
@@ -43,8 +43,8 @@ import jakarta.annotation.Nonnull;
 import jakarta.servlet.ServletContext;
 
 /**
- * This listener is invoked during the servlet initialization. This is basically
- * a ServletContextListener.
+ * This listener is invoked during the servlet initialization. This is basically a
+ * ServletContextListener.
  *
  * @author Philip Helger
  */
@@ -102,8 +102,8 @@ public final class AppWebAppListener extends WebAppListenerBootstrap
   @Override
   protected void initAjax (@Nonnull final IAjaxRegistry aAjaxRegistry)
   {
-    aAjaxRegistry.registerFunction (CAjax.DATATABLES);
-    aAjaxRegistry.registerFunction (CAjax.DATATABLES_I18N);
+    aAjaxRegistry.registerFunction (CPeppolSharedAjax.DATATABLES);
+    aAjaxRegistry.registerFunction (CPeppolSharedAjax.DATATABLES_I18N);
   }
 
   @Override
@@ -146,7 +146,7 @@ public final class AppWebAppListener extends WebAppListenerBootstrap
   protected void initManagers ()
   {
     // Load managers
-    PPMetaManager.getInstance ();
+    PhotonPeppolMetaManager.getInstance ();
 
     // Setup error handler
     AppInternalErrorHandler.doSetup ();

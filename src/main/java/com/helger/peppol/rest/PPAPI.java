@@ -17,6 +17,7 @@
 package com.helger.peppol.rest;
 
 import com.helger.peppol.api.rest.APIExceptionMapper;
+import com.helger.peppol.api.rest.PeppolSharedRestAPI;
 import com.helger.photon.api.APIDescriptor;
 import com.helger.photon.api.APIPath;
 import com.helger.photon.api.IAPIExceptionMapper;
@@ -26,10 +27,6 @@ import jakarta.annotation.Nonnull;
 
 public final class PPAPI
 {
-  public static final String PARAM_SML_ID = "smlID";
-  public static final String PARAM_PARTICIPANT_ID = "participantID";
-  public static final String PARAM_DOCTYPE_ID = "docTypeID";
-
   private PPAPI ()
   {}
 
@@ -40,11 +37,11 @@ public final class PPAPI
     // More specific to less specific
     {
       final APIDescriptor aSMPQueryEndpoints = new APIDescriptor (APIPath.get ("/smpquery/{" +
-                                                                               PARAM_SML_ID +
+                                                                               PeppolSharedRestAPI.PARAM_SML_ID +
                                                                                "}/{" +
-                                                                               PARAM_PARTICIPANT_ID +
+                                                                               PeppolSharedRestAPI.PARAM_PARTICIPANT_ID +
                                                                                "}/{" +
-                                                                               PARAM_DOCTYPE_ID +
+                                                                               PeppolSharedRestAPI.PARAM_DOCTYPE_ID +
                                                                                "}"),
                                                                   new APISMPQueryGetServiceInformation ());
       aSMPQueryEndpoints.setExceptionMapper (aExceptionMapper);
@@ -53,9 +50,9 @@ public final class PPAPI
 
     {
       final APIDescriptor aSMPQueryDocTypes = new APIDescriptor (APIPath.get ("/smpquery/{" +
-                                                                              PARAM_SML_ID +
+                                                                              PeppolSharedRestAPI.PARAM_SML_ID +
                                                                               "}/{" +
-                                                                              PARAM_PARTICIPANT_ID +
+                                                                              PeppolSharedRestAPI.PARAM_PARTICIPANT_ID +
                                                                               "}"), new APISMPQueryGetDocTypes ());
       aSMPQueryDocTypes.setExceptionMapper (aExceptionMapper);
       aAPIRegistry.registerAPI (aSMPQueryDocTypes);
@@ -63,9 +60,9 @@ public final class PPAPI
 
     {
       final APIDescriptor aSMPQueryBusinessCard = new APIDescriptor (APIPath.get ("/businesscard/{" +
-                                                                                  PARAM_SML_ID +
+                                                                                  PeppolSharedRestAPI.PARAM_SML_ID +
                                                                                   "}/{" +
-                                                                                  PARAM_PARTICIPANT_ID +
+                                                                                  PeppolSharedRestAPI.PARAM_PARTICIPANT_ID +
                                                                                   "}"),
                                                                      new APISMPQueryGetBusinessCard ());
       aSMPQueryBusinessCard.setExceptionMapper (aExceptionMapper);
@@ -74,9 +71,9 @@ public final class PPAPI
 
     {
       final APIDescriptor aSMPQueryBusinessCard = new APIDescriptor (APIPath.get ("/is-in-peppol/{" +
-                                                                                  PARAM_SML_ID +
+                                                                                  PeppolSharedRestAPI.PARAM_SML_ID +
                                                                                   "}/{" +
-                                                                                  PARAM_PARTICIPANT_ID +
+                                                                                  PeppolSharedRestAPI.PARAM_PARTICIPANT_ID +
                                                                                   "}"),
                                                                      new APICheckPeppolParticipantRegistered ());
       aSMPQueryBusinessCard.setExceptionMapper (aExceptionMapper);

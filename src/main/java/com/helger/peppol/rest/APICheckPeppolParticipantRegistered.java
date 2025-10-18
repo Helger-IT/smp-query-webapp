@@ -11,17 +11,17 @@ import com.helger.annotation.Nonempty;
 import com.helger.http.CHttp;
 import com.helger.mime.CMimeType;
 import com.helger.peppol.api.rest.APIParamException;
+import com.helger.peppol.api.rest.PeppolSharedRestAPI;
 import com.helger.peppol.photon.mgr.PhotonPeppolMetaManager;
 import com.helger.peppol.photon.smlconfig.ISMLConfiguration;
 import com.helger.peppol.photon.smlconfig.ISMLConfigurationManager;
+import com.helger.peppol.photon.smp.SMPQueryParams;
 import com.helger.peppolid.CIdentifier;
 import com.helger.peppolid.IParticipantIdentifier;
 import com.helger.peppolid.factory.PeppolIdentifierFactory;
 import com.helger.peppolid.peppol.PeppolIdentifierHelper;
 import com.helger.photon.api.IAPIDescriptor;
 import com.helger.photon.app.PhotonUnifiedResponse;
-import com.helger.smpclient.url.PeppolNaptrURLProvider;
-import com.helger.smpclient.url.SMPDNSResolutionException;
 import com.helger.web.scope.IRequestWebScopeWithoutResponse;
 
 import jakarta.annotation.Nonnull;
@@ -35,23 +35,6 @@ public final class APICheckPeppolParticipantRegistered extends AbstractAppAPIExe
 {
   private static final Logger LOGGER = LoggerFactory.getLogger (APICheckPeppolParticipantRegistered.class);
 
-  private static boolean _isSMPRegisteredInDNSViaInetAddress (@Nonnull final IParticipantIdentifier aParticipantID,
-                                                              @Nonnull final String sSMLZoneName)
-  {
-    try
-    {
-      // Perform NAPTR resolution
-      PeppolNaptrURLProvider.INSTANCE.getSMPURIOfParticipant (aParticipantID, sSMLZoneName);
-
-      // Found it
-      return true;
-    }
-    catch (final SMPDNSResolutionException ex)
-    {
-      return false;
-    }
-  }
-
   @Override
   public void invokeAPI (@Nonnull @Nonempty final String sLogPrefix,
                          @Nonnull final IAPIDescriptor aAPIDescriptor,
@@ -61,13 +44,13 @@ public final class APICheckPeppolParticipantRegistered extends AbstractAppAPIExe
                          @Nonnull final PhotonUnifiedResponse aUnifiedResponse) throws IOException
   {
     final ISMLConfigurationManager aSMLConfigurationMgr = PhotonPeppolMetaManager.getSMLConfigurationMgr ();
-    final String sSMLID = aPathVariables.get (PPAPI.PARAM_SML_ID);
+    final String sSMLID = aPathVariables.get (PeppolSharedRestAPI.PARAM_SML_ID);
     final boolean bSMLAutoDetect = ISMLConfigurationManager.ID_AUTO_DETECT.equals (sSMLID);
     final ISMLConfiguration aSML = aSMLConfigurationMgr.getSMLInfoOfID (sSMLID);
     if (aSML == null && !bSMLAutoDetect)
       throw new APIParamException ("Unsupported SML ID '" + sSMLID + "' provided.");
 
-    String sPPID = aPathVariables.get (PPAPI.PARAM_PARTICIPANT_ID);
+    String sPPID = aPathVariables.get (PeppolSharedRestAPI.PARAM_PARTICIPANT_ID);
     if (sPPID != null)
     {
       // Add prefix on demand
@@ -89,14 +72,14 @@ public final class APICheckPeppolParticipantRegistered extends AbstractAppAPIExe
       bRegistered = false;
       for (final ISMLConfiguration aCurSML : aSMLConfigurationMgr.getAllSorted ())
       {
-        bRegistered = _isSMPRegisteredInDNSViaInetAddress (aPPID, aCurSML.getDNSZone ());
+        bRegistered = SMPQueryParams.isSMPRegisteredInDNSViaNaptr (aPPID, aCurSML.getSMLInfo ().getDNSZone ());
         if (bRegistered)
           break;
       }
     }
     else
     {
-      bRegistered = _isSMPRegisteredInDNSViaInetAddress (aPPID, aSML.getDNSZone ());
+      bRegistered = SMPQueryParams.isSMPRegisteredInDNSViaNaptr (aPPID, aSML.getSMLInfo ().getDNSZone ());
     }
 
     if (bRegistered)

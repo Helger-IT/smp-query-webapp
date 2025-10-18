@@ -17,9 +17,8 @@
 package com.helger.peppol.app;
 
 import com.helger.annotation.style.UsedViaReflection;
-import com.helger.base.debug.GlobalDebug;
-import com.helger.config.ConfigFactory;
 import com.helger.config.IConfig;
+import com.helger.peppol.photon.config.PeppolSharedConfig;
 import com.helger.scope.singleton.AbstractGlobalSingleton;
 
 import jakarta.annotation.Nonnull;
@@ -33,9 +32,6 @@ import jakarta.annotation.Nullable;
  */
 public final class AppConfig extends AbstractGlobalSingleton
 {
-  /** The name of the file containing the settings */
-  private static final IConfig CONFIG = ConfigFactory.getDefaultConfig ();
-
   @Deprecated
   @UsedViaReflection
   private AppConfig ()
@@ -44,7 +40,7 @@ public final class AppConfig extends AbstractGlobalSingleton
   @Nonnull
   public static IConfig getConfig ()
   {
-    return CONFIG;
+    return PeppolSharedConfig.getConfig ();
   }
 
   @Nullable
@@ -68,15 +64,5 @@ public final class AppConfig extends AbstractGlobalSingleton
   public static boolean isCheckFileAccess ()
   {
     return getConfig ().getAsBoolean ("webapp.checkfileaccess", true);
-  }
-
-  public static boolean isRestLogExceptions ()
-  {
-    return getConfig ().getAsBoolean ("rest.log.exceptions", GlobalDebug.isDebugMode ());
-  }
-
-  public static boolean isRestExceptionsWithPayload ()
-  {
-    return getConfig ().getAsBoolean ("rest.exceptions.payload", GlobalDebug.isDebugMode ());
   }
 }

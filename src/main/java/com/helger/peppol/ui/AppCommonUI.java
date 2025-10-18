@@ -21,7 +21,7 @@ import com.helger.html.css.DefaultCSSClassProvider;
 import com.helger.html.css.ICSSClassProvider;
 import com.helger.html.jquery.JQueryAjaxBuilder;
 import com.helger.html.jscode.JSAssocArray;
-import com.helger.peppol.app.ajax.CAjax;
+import com.helger.peppol.api.ajax.CPeppolSharedAjax;
 import com.helger.photon.bootstrap4.ext.BootstrapSystemMessage;
 import com.helger.photon.bootstrap4.uictrls.datatables.BootstrapDataTables;
 import com.helger.photon.core.requestparam.RequestParameterHandlerURLPathNamed;
@@ -55,11 +55,11 @@ public final class AppCommonUI
       final IRequestWebScopeWithoutResponse aRequestScope = aLEC.getRequestScope ();
       aDataTables.setAutoWidth (false)
                  .setLengthMenu (LENGTH_MENU)
-                 .setAjaxBuilder (new JQueryAjaxBuilder ().url (CAjax.DATATABLES.getInvocationURL (aRequestScope))
+                 .setAjaxBuilder (new JQueryAjaxBuilder ().url (CPeppolSharedAjax.DATATABLES.getInvocationURL (aRequestScope))
                                                           .data (new JSAssocArray ().add (AjaxExecutorDataTables.OBJECT_ID,
                                                                                           aTable.getID ())))
                  .setServerFilterType (EDataTablesFilterType.ALL_TERMS_PER_ROW)
-                 .setTextLoadingURL (CAjax.DATATABLES_I18N.getInvocationURL (aRequestScope),
+                 .setTextLoadingURL (CPeppolSharedAjax.DATATABLES_I18N.getInvocationURL (aRequestScope),
                                      AjaxExecutorDataTablesI18N.REQUEST_PARAM_LANGUAGE_ID)
                  .addPlugin (new DataTablesPluginSearchHighlight ());
     });
