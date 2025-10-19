@@ -16,7 +16,11 @@
  */
 package com.helger.peppol.rest;
 
+import com.helger.peppol.api.rest.APICheckPeppolParticipantRegistered;
 import com.helger.peppol.api.rest.APIExceptionMapper;
+import com.helger.peppol.api.rest.APISMPQueryGetBusinessCard;
+import com.helger.peppol.api.rest.APISMPQueryGetDocTypes;
+import com.helger.peppol.api.rest.APISMPQueryGetServiceInformation;
 import com.helger.peppol.api.rest.PeppolSharedRestAPI;
 import com.helger.photon.api.APIDescriptor;
 import com.helger.photon.api.APIPath;
@@ -27,6 +31,8 @@ import jakarta.annotation.Nonnull;
 
 public final class PPAPI
 {
+  private static final String USER_AGENT = "Helger-IT-SMP-Query-WebApp/1.0 (https://github.com/Helger-IT/smp-query-webapp)";
+
   private PPAPI ()
   {}
 
@@ -43,7 +49,7 @@ public final class PPAPI
                                                                                "}/{" +
                                                                                PeppolSharedRestAPI.PARAM_DOCTYPE_ID +
                                                                                "}"),
-                                                                  new APISMPQueryGetServiceInformation ());
+                                                                  new APISMPQueryGetServiceInformation (USER_AGENT));
       aSMPQueryEndpoints.setExceptionMapper (aExceptionMapper);
       aAPIRegistry.registerAPI (aSMPQueryEndpoints);
     }
@@ -53,7 +59,8 @@ public final class PPAPI
                                                                               PeppolSharedRestAPI.PARAM_SML_ID +
                                                                               "}/{" +
                                                                               PeppolSharedRestAPI.PARAM_PARTICIPANT_ID +
-                                                                              "}"), new APISMPQueryGetDocTypes ());
+                                                                              "}"),
+                                                                 new APISMPQueryGetDocTypes (USER_AGENT));
       aSMPQueryDocTypes.setExceptionMapper (aExceptionMapper);
       aAPIRegistry.registerAPI (aSMPQueryDocTypes);
     }
@@ -64,7 +71,7 @@ public final class PPAPI
                                                                                   "}/{" +
                                                                                   PeppolSharedRestAPI.PARAM_PARTICIPANT_ID +
                                                                                   "}"),
-                                                                     new APISMPQueryGetBusinessCard ());
+                                                                     new APISMPQueryGetBusinessCard (USER_AGENT));
       aSMPQueryBusinessCard.setExceptionMapper (aExceptionMapper);
       aAPIRegistry.registerAPI (aSMPQueryBusinessCard);
     }
@@ -75,7 +82,7 @@ public final class PPAPI
                                                                                   "}/{" +
                                                                                   PeppolSharedRestAPI.PARAM_PARTICIPANT_ID +
                                                                                   "}"),
-                                                                     new APICheckPeppolParticipantRegistered ());
+                                                                     new APICheckPeppolParticipantRegistered (USER_AGENT));
       aSMPQueryBusinessCard.setExceptionMapper (aExceptionMapper);
       aAPIRegistry.registerAPI (aSMPQueryBusinessCard);
     }
