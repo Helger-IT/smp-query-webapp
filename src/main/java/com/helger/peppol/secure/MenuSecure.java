@@ -19,7 +19,7 @@ package com.helger.peppol.secure;
 import com.helger.annotation.concurrent.Immutable;
 import com.helger.peppol.app.AppSecurity;
 import com.helger.peppol.app.CPPApp;
-import com.helger.peppol.photon.smlconfig.page.PageSecureSMLConfiguration;
+import com.helger.peppol.ui.smlconfig.page.PageSecureSMLConfiguration;
 import com.helger.photon.bootstrap4.pages.BootstrapPagesMenuConfigurator;
 import com.helger.photon.bootstrap4.pages.security.BasePageSecurityChangePassword;
 import com.helger.photon.core.menu.IMenuItemPage;
