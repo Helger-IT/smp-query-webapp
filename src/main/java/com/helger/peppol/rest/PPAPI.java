@@ -16,7 +16,7 @@
  */
 package com.helger.peppol.rest;
 
-import com.helger.peppol.api.rest.APICheckPeppolParticipantRegistered;
+import com.helger.peppol.api.rest.APIGetCheckPeppolParticipantRegistered;
 import com.helger.peppol.api.rest.APIExceptionMapper;
 import com.helger.peppol.api.rest.APISMPQueryGetBusinessCard;
 import com.helger.peppol.api.rest.APISMPQueryGetDocTypes;
@@ -77,12 +77,12 @@ public final class PPAPI
     }
 
     {
-      final APIDescriptor aSMPQueryBusinessCard = new APIDescriptor (APIPath.get ("/is-in-peppol/{" +
+      final APIDescriptor aSMPQueryBusinessCard = new APIDescriptor (APIPath.get ("/ppidexistence/{" +
                                                                                   PeppolSharedRestAPI.PARAM_SML_ID +
                                                                                   "}/{" +
                                                                                   PeppolSharedRestAPI.PARAM_PARTICIPANT_ID +
                                                                                   "}"),
-                                                                     new APICheckPeppolParticipantRegistered (USER_AGENT));
+                                                                     new APIGetCheckPeppolParticipantRegistered (USER_AGENT));
       aSMPQueryBusinessCard.setExceptionMapper (aExceptionMapper);
       aAPIRegistry.registerAPI (aSMPQueryBusinessCard);
     }
