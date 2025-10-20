@@ -29,7 +29,7 @@
   <packaging>war</packaging>
   <name>smp-query-webapp</name>
   <description>Small web application to query SMPs</description>
-  <url>https://github.com/phax/smp-query-webapp</url>
+  <url>https://github.com/Helger-IT/smp-query-webapp</url>
   <inceptionYear>2023</inceptionYear>
   
   <licenses>
@@ -41,9 +41,9 @@
   </licenses>
        
   <scm>
-    <connection>scm:git:https://github.com/phax/smp-query-webapp.git</connection>
-    <developerConnection>scm:git:https://github.com/phax/smp-query-webapp.git</developerConnection>
-    <url>https://github.com/phax/smp-query-webapp</url>
+    <connection>scm:git:https://github.com/Helger-IT/smp-query-webapp.git</connection>
+    <developerConnection>scm:git:https://github.com/Helger-IT/smp-query-webapp.git</developerConnection>
+    <url>https://github.com/Helger-IT/smp-query-webapp</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -65,65 +65,15 @@
     <m2e.jaxrs.activation>false</m2e.jaxrs.activation>
     <m2e.jpa.activation>false</m2e.jpa.activation>
     <m2e.jsf.activation>false</m2e.jsf.activation>
-    <dnsjava.version>3.6.3</dnsjava.version>
     <log4j.version>2.25.2</log4j.version>
   </properties>
   
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.helger.commons</groupId>
-        <artifactId>ph-commons-parent-pom</artifactId>
-        <version>12.0.4</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.helger.masterdata</groupId>
-        <artifactId>ph-masterdata-parent-pom</artifactId>
-        <version>8.0.0</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.helger</groupId>
-        <artifactId>ph-css-parent-pom</artifactId>
-        <version>8.0.0</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.helger.web</groupId>
-        <artifactId>ph-web-parent-pom</artifactId>
-        <version>11.1.1</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.helger.photon</groupId>
-        <artifactId>ph-oton-parent-pom</artifactId>
-        <version>10.0.1</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.helger.peppol</groupId>
-        <artifactId>peppol-commons-parent-pom</artifactId>
-        <version>12.0.4</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.helger.photon</groupId>
-        <artifactId>ph-oton-bootstrap4-parent-pom</artifactId>
-        <version>10.0.0</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
         <groupId>com.helger.peppol.ui</groupId>
         <artifactId>peppol-shared-ui-parent-pom</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.9.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -180,12 +130,6 @@
     <dependency>
       <groupId>com.sun.xml.bind</groupId>
       <artifactId>jaxb-impl</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>dnsjava</groupId>
-      <artifactId>dnsjava</artifactId>
-      <version>${dnsjava.version}</version>
     </dependency>
 
     <dependency>
