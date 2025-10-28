@@ -1,6 +1,6 @@
 # smp-query-webapp
 
-Small web application that allows an arbitrary SMP query and returns JSON results
+Small web application that allows an arbitrary SMP and DNS query and returns JSON results
 This is the API subset parts from https://peppol.helger.com for standalone usage.
 
 This project is part of my Peppol solution stack. See https://github.com/phax/peppol for other components and libraries in that area.
@@ -26,9 +26,13 @@ A prebuild Docker image is available on Docker Hub as `phelger/smpqwa:latest` (f
 ## Supported query APIs
 
 * SMP query all document types of a participant
+    * GET `/api/smpquery/{SML-ID}/{participant-ID}[?businessCard=false&xmlSchemaValidation=true&verifySignature=true]`
 * SMP query all endpoints of a participant for a certain document type
+    * GET `/api/smpquery/{SML-ID}/{participant-ID}/{docType-ID}[?xmlSchemaValidation=true&verifySignature=true]`
 * SMP query the Business Card of a participant
-* Check if a participant is registered in the Peppol Network
+    * GET `/api/businesscard/{SML-ID}/{participant-ID}`
+* Check if a participant is registered in the Peppol Network (via DNS)
+    * GET `/api/ppidexistence/{SML-ID}/{participant-ID}`
 
 See https://peppol.helger.com/public/locale-en_US/menuitem-tools-rest-api for the full API description.
 
