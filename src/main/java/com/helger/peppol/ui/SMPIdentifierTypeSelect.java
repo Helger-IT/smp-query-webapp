@@ -18,11 +18,11 @@ package com.helger.peppol.ui;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.peppolid.factory.ESMPIdentifierType;
 import com.helger.photon.core.form.RequestField;
 import com.helger.photon.uicore.html.select.HCExtSelect;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * UI select for SMP API types
@@ -31,7 +31,7 @@ import jakarta.annotation.Nonnull;
  */
 public class SMPIdentifierTypeSelect extends HCExtSelect
 {
-  public SMPIdentifierTypeSelect (@Nonnull final RequestField aRF, @Nonnull final Locale aDisplayLocale)
+  public SMPIdentifierTypeSelect (@NonNull final RequestField aRF, @NonNull final Locale aDisplayLocale)
   {
     super (aRF);
     addOptionPleaseSelect (aDisplayLocale);

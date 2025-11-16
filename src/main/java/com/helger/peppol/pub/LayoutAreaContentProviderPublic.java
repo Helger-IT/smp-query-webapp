@@ -16,6 +16,9 @@
  */
 package com.helger.peppol.pub;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.html.hc.IHCNode;
 import com.helger.html.hc.html.grouping.HCDiv;
 import com.helger.html.hc.html.grouping.HCP;
@@ -42,8 +45,7 @@ import com.helger.photon.core.menu.MenuItemDeterminatorCallback;
 import com.helger.url.ISimpleURL;
 import com.helger.url.SimpleURL;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+
 
 /**
  * The viewport renderer (menu + content area)
@@ -55,7 +57,7 @@ public final class LayoutAreaContentProviderPublic
   private LayoutAreaContentProviderPublic ()
   {}
 
-  @Nonnull
+  @NonNull
   private static BootstrapNavbar _getNavbar (final LayoutExecutionContext aLEC)
   {
     final ISimpleURL aLinkToStartPage = aLEC.getLinkToMenuItem (aLEC.getMenuTree ().getDefaultMenuItemID ());
@@ -71,8 +73,8 @@ public final class LayoutAreaContentProviderPublic
     return aNavbar;
   }
 
-  @Nonnull
-  public static IHCNode getMenuContent (@Nonnull final LayoutExecutionContext aLEC)
+  @NonNull
+  public static IHCNode getMenuContent (@NonNull final LayoutExecutionContext aLEC)
   {
     // Main menu
     final IMenuTree aMenuTree = aLEC.getMenuTree ();
@@ -81,15 +83,15 @@ public final class LayoutAreaContentProviderPublic
     return BootstrapMenuItemRenderer.createSideBarMenu (aLEC, aCallback);
   }
 
-  @Nonnull
-  public static IHCNode getPageContent (@Nonnull final LayoutExecutionContext aLEC)
+  @NonNull
+  public static IHCNode getPageContent (@NonNull final LayoutExecutionContext aLEC)
   {
     return BootstrapPageRenderer.getPageContent (aLEC);
   }
 
   @Nullable
-  private static IHCNode _getRenderedFooterMenuObj (@Nonnull final ILayoutExecutionContext aLEC,
-                                                    @Nonnull final BootstrapMenuItemRendererHorz aRenderer,
+  private static IHCNode _getRenderedFooterMenuObj (@NonNull final ILayoutExecutionContext aLEC,
+                                                    @NonNull final BootstrapMenuItemRendererHorz aRenderer,
                                                     @Nullable final IMenuObject aMenuObj)
   {
     if (aMenuObj == null)
@@ -107,8 +109,8 @@ public final class LayoutAreaContentProviderPublic
     throw new IllegalStateException ("Unsupported menu object type: " + aMenuObj);
   }
 
-  @Nonnull
-  public static IHCNode getContent (@Nonnull final LayoutExecutionContext aLEC)
+  @NonNull
+  public static IHCNode getContent (@NonNull final LayoutExecutionContext aLEC)
   {
     final HCNodeList ret = new HCNodeList ();
 

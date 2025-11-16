@@ -16,13 +16,15 @@
  */
 package com.helger.peppol.app;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.annotation.style.UsedViaReflection;
 import com.helger.config.IConfig;
 import com.helger.peppol.ui.types.config.PeppolSharedConfig;
 import com.helger.scope.singleton.AbstractGlobalSingleton;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+
 
 /**
  * This class provides access to the settings as contained in the <code>webapp.properties</code>
@@ -37,7 +39,7 @@ public final class AppConfig extends AbstractGlobalSingleton
   private AppConfig ()
   {}
 
-  @Nonnull
+  @NonNull
   public static IConfig getConfig ()
   {
     return PeppolSharedConfig.getConfig ();

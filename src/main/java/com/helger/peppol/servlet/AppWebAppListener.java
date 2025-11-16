@@ -16,6 +16,7 @@
  */
 package com.helger.peppol.servlet;
 
+import org.jspecify.annotations.NonNull;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.helger.commons.vendor.VendorInfo;
@@ -39,7 +40,6 @@ import com.helger.photon.core.appid.PhotonGlobalState;
 import com.helger.photon.core.locale.ILocaleManager;
 import com.helger.photon.core.menu.MenuTree;
 
-import jakarta.annotation.Nonnull;
 import jakarta.servlet.ServletContext;
 
 /**
@@ -51,25 +51,25 @@ import jakarta.servlet.ServletContext;
 public final class AppWebAppListener extends WebAppListenerBootstrap
 {
   @Override
-  protected String getInitParameterDebug (@Nonnull final ServletContext aSC)
+  protected String getInitParameterDebug (@NonNull final ServletContext aSC)
   {
     return AppConfig.getGlobalDebug ();
   }
 
   @Override
-  protected String getInitParameterProduction (@Nonnull final ServletContext aSC)
+  protected String getInitParameterProduction (@NonNull final ServletContext aSC)
   {
     return AppConfig.getGlobalProduction ();
   }
 
   @Override
-  protected String getDataPath (@Nonnull final ServletContext aSC)
+  protected String getDataPath (@NonNull final ServletContext aSC)
   {
     return AppConfig.getDataPath ();
   }
 
   @Override
-  protected boolean shouldCheckFileAccess (@Nonnull final ServletContext aSC)
+  protected boolean shouldCheckFileAccess (@NonNull final ServletContext aSC)
   {
     return AppConfig.isCheckFileAccess ();
   }
@@ -93,21 +93,21 @@ public final class AppWebAppListener extends WebAppListenerBootstrap
   }
 
   @Override
-  protected void initLocales (@Nonnull final ILocaleManager aLocaleMgr)
+  protected void initLocales (@NonNull final ILocaleManager aLocaleMgr)
   {
     aLocaleMgr.registerLocale (CPPApp.LOCALE_EN);
     aLocaleMgr.setDefaultLocale (CPPApp.DEFAULT_LOCALE);
   }
 
   @Override
-  protected void initAjax (@Nonnull final IAjaxRegistry aAjaxRegistry)
+  protected void initAjax (@NonNull final IAjaxRegistry aAjaxRegistry)
   {
     aAjaxRegistry.registerFunction (CPeppolSharedAjax.DATATABLES);
     aAjaxRegistry.registerFunction (CPeppolSharedAjax.DATATABLES_I18N);
   }
 
   @Override
-  protected void initAPI (@Nonnull final IAPIRegistry aAPIRegistry)
+  protected void initAPI (@NonNull final IAPIRegistry aAPIRegistry)
   {
     PPAPI.init (aAPIRegistry);
   }

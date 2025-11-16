@@ -16,8 +16,10 @@
  */
 package com.helger.peppol.rest;
 
-import com.helger.peppol.api.rest.APIGetCheckPeppolParticipantRegistered;
+import org.jspecify.annotations.NonNull;
+
 import com.helger.peppol.api.rest.APIExceptionMapper;
+import com.helger.peppol.api.rest.APIGetCheckPeppolParticipantRegistered;
 import com.helger.peppol.api.rest.APISMPQueryGetBusinessCard;
 import com.helger.peppol.api.rest.APISMPQueryGetDocTypes;
 import com.helger.peppol.api.rest.APISMPQueryGetServiceInformation;
@@ -27,8 +29,6 @@ import com.helger.photon.api.APIPath;
 import com.helger.photon.api.IAPIExceptionMapper;
 import com.helger.photon.api.IAPIRegistry;
 
-import jakarta.annotation.Nonnull;
-
 public final class PPAPI
 {
   private static final String USER_AGENT = "Helger-IT-SMP-Query-WebApp/1.0 (https://github.com/Helger-IT/smp-query-webapp)";
@@ -36,7 +36,7 @@ public final class PPAPI
   private PPAPI ()
   {}
 
-  public static void init (@Nonnull final IAPIRegistry aAPIRegistry)
+  public static void init (@NonNull final IAPIRegistry aAPIRegistry)
   {
     final IAPIExceptionMapper aExceptionMapper = new APIExceptionMapper ();
 

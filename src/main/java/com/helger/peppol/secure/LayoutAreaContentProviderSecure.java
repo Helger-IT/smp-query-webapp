@@ -18,6 +18,8 @@ package com.helger.peppol.secure;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.html.hc.IHCNode;
 import com.helger.html.hc.html.grouping.HCDiv;
 import com.helger.html.hc.html.textlevel.HCSpan;
@@ -46,8 +48,6 @@ import com.helger.photon.security.util.SecurityHelper;
 import com.helger.url.ISimpleURL;
 import com.helger.web.scope.IRequestWebScopeWithoutResponse;
 
-import jakarta.annotation.Nonnull;
-
 /**
  * The viewport renderer (menu + content area)
  *
@@ -58,8 +58,8 @@ public final class LayoutAreaContentProviderSecure
   private LayoutAreaContentProviderSecure ()
   {}
 
-  @Nonnull
-  private static IHCNode _getNavbar (@Nonnull final LayoutExecutionContext aLEC)
+  @NonNull
+  private static IHCNode _getNavbar (@NonNull final LayoutExecutionContext aLEC)
   {
     final Locale aDisplayLocale = aLEC.getDisplayLocale ();
     final IRequestWebScopeWithoutResponse aRequestScope = aLEC.getRequestScope ();
@@ -93,8 +93,8 @@ public final class LayoutAreaContentProviderSecure
     return aNavbar;
   }
 
-  @Nonnull
-  public static IHCNode getContent (@Nonnull final LayoutExecutionContext aLEC)
+  @NonNull
+  public static IHCNode getContent (@NonNull final LayoutExecutionContext aLEC)
   {
     final HCNodeList ret = new HCNodeList ();
 

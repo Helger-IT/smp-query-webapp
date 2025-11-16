@@ -16,10 +16,10 @@
  */
 package com.helger.peppol.app;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.annotation.Nonempty;
 import com.helger.annotation.concurrent.Immutable;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * Misc utility methods
@@ -32,7 +32,7 @@ public final class AppHelper
   private AppHelper ()
   {}
 
-  @Nonnull
+  @NonNull
   @Nonempty
   public static String getApplicationTitle ()
   {
