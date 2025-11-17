@@ -9,6 +9,9 @@ A prebuild Docker image is available on Docker Hub as `phelger/smpqwa:latest` (f
 
 ## News and Noteworthy
 
+2025-11-17
+* Improved the error handling of the SMP query APIs based on #3 - returning 404 if not found
+
 2025-10-20
 * Replace API `/api/is-in-peppol/{smlid}/{participantID}` with `/api/ppidexistence/{smlid}/{participantID}` to be in sync with peppol.helger.com
 * All the API implementations are now shared between this application and Peppol Practical 
