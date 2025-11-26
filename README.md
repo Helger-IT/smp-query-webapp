@@ -7,25 +7,6 @@ This project is part of my Peppol solution stack. See https://github.com/phax/pe
 
 A prebuild Docker image is available on Docker Hub as `phelger/smpqwa:latest` (for `linux/amd64`) and `phelger/smpqwa-arm64:latest` (for `linux/arm64`).
 
-## News and Noteworthy
-
-2025-11-17
-* Improved the error handling of the SMP query APIs based on #3 - returning 404 if not found
-
-2025-10-20
-* Replace API `/api/is-in-peppol/{smlid}/{participantID}` with `/api/ppidexistence/{smlid}/{participantID}` to be in sync with peppol.helger.com
-* All the API implementations are now shared between this application and Peppol Practical 
-
-2025-10-01
-* Added new API `/api/is-in-peppol/{smlid}/{participantID}`
-
-2025-09-17
-* Updated the truststore for the latest Directory TLS certs
-* Fixed a potential problem with DNS lookup results ending with '/'
-
-2025-07-21
-* Extended the truststore to contain Peppol PKI G3 CAs as well
-
 ## Supported query APIs
 
 * SMP query all document types of a participant
@@ -88,6 +69,25 @@ Deployment:
 docker login -u phelger
 docker push phelger/smpqwa
 ```
+
+## News and Noteworthy
+
+2025-11-17
+* Improved the error handling of the SMP query APIs based on #3 - returning 404 if not found
+
+2025-10-20
+* Replace API `/api/is-in-peppol/{smlid}/{participantID}` with `/api/ppidexistence/{smlid}/{participantID}` to be in sync with peppol.helger.com
+* All the API implementations are now shared between this application and Peppol Practical 
+
+2025-10-01
+* Added new API `/api/is-in-peppol/{smlid}/{participantID}`
+
+2025-09-17
+* Updated the truststore for the latest Directory TLS certs
+* Fixed a potential problem with DNS lookup results ending with '/'
+
+2025-07-21
+* Extended the truststore to contain Peppol PKI G3 CAs as well
 
 ---
 
