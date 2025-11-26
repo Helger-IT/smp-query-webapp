@@ -67,6 +67,24 @@
     <m2e.jsf.activation>false</m2e.jsf.activation>
     <log4j.version>2.25.2</log4j.version>
   </properties>
+
+
+  <!-- Enable when using a SNAPSHOT version: -->
+  <!--
+  -->
+  <repositories>
+    <repository>
+      <name>Central Portal Snapshots</name>
+      <id>central-portal-snapshots</id>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
   
   <dependencyManagement>
     <dependencies>
