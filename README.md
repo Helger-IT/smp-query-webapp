@@ -18,7 +18,7 @@ A prebuild Docker image is available on Docker Hub as `phelger/smpqwa:latest` (f
 * Check if a participant is registered in the Peppol Network (via DNS)
     * GET `/api/ppidexistence/{SML-ID}/{participant-ID}`
 
-See https://peppol.helger.com/public/locale-en_US/menuitem-tools-rest-api for the full API description.
+See the Wiki page https://github.com/Helger-IT/smp-query-webapp/wiki/REST-API for the full API description.
 
 Supported SML servers are `digittest` (Peppol SMK), `digitprod` (Peppol SML) and `autodetect` (automatic detection).
 
