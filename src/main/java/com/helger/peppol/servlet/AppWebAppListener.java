@@ -17,6 +17,8 @@
 package com.helger.peppol.servlet;
 
 import org.jspecify.annotations.NonNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.helger.commons.vendor.VendorInfo;
@@ -54,6 +56,8 @@ import jakarta.servlet.ServletContext;
  */
 public final class AppWebAppListener extends WebAppListenerBootstrap
 {
+  private static final Logger LOGGER = LoggerFactory.getLogger (AppWebAppListener.class);
+
   @Override
   protected String getInitParameterDebug (@NonNull final ServletContext aSC)
   {
@@ -156,7 +160,10 @@ public final class AppWebAppListener extends WebAppListenerBootstrap
     AppInternalErrorHandler.doSetup ();
 
     // Register specific SML configurations
+    if (AppConfig.isNemhandelSupportEnabled ())
     {
+      LOGGER.info ("Registering Nemhandel SML configurations");
+
       final ISMLConfigurationManager aSMLConfigMgr = PhotonPeppolMetaManager.getSMLConfigurationMgr ();
       if (!aSMLConfigMgr.containsSMLInfoWithID ("nemhandeltest"))
         aSMLConfigMgr.createSMLInfo ("nemhandeltest",

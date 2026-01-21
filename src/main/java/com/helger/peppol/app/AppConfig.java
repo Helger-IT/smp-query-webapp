@@ -24,8 +24,6 @@ import com.helger.config.IConfig;
 import com.helger.peppol.ui.types.config.PeppolSharedConfig;
 import com.helger.scope.singleton.AbstractGlobalSingleton;
 
-
-
 /**
  * This class provides access to the settings as contained in the <code>webapp.properties</code>
  * file.
@@ -66,5 +64,10 @@ public final class AppConfig extends AbstractGlobalSingleton
   public static boolean isCheckFileAccess ()
   {
     return getConfig ().getAsBoolean ("webapp.checkfileaccess", true);
+  }
+
+  public static boolean isNemhandelSupportEnabled ()
+  {
+    return getConfig ().getAsBoolean ("nemhandel.support.enabled", false);
   }
 }

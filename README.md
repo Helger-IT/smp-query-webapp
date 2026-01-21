@@ -21,6 +21,7 @@ A prebuild Docker image is available on Docker Hub as `phelger/smpqwa:latest` (f
 See the Wiki page https://github.com/Helger-IT/smp-query-webapp/wiki/REST-API for the full API description.
 
 Supported SML servers are `digittest` (Peppol SMK), `digitprod` (Peppol SML) and `autodetect` (automatic detection).
+Additionally SML servers `nemhandeltest` (Nemhandel Test SML) and `nemhandelprod` (Nemhandel Prod SML) can be enabled via configuration property `nemhandel.support.enabled`.
 
 ## Configuration parameters
 
@@ -35,7 +36,8 @@ Supported properties are:
 * **`webapp.datapath`**: where to store data. Does not need to be a persistent volume.
 * **`webapp.checkfileaccess`**: check file access on startup. Should always be `false`.
 * **`rest.log.exceptions`**: this property enables or disables the detailed logging of exceptions that occur while processing REST calls. By default the logging is disabled.
-* **`rest.exceptions.payload`**: this property enables or disables the provision of HTTP response contents in case of errors from the REST API. By default this is disabled. 
+* **`rest.exceptions.payload`**: this property enables or disables the provision of HTTP response contents in case of errors from the REST API. By default this is disabled.
+* **`nemhandel.support.enabled`**: if this property is set to `true` then the SML configurations `nemhandeltest` and `nemhandelprod` are enabled.
 
 SMP Client configuration properties as described on https://github.com/phax/peppol-commons/tree/master?tab=readme-ov-file#configuration
 
@@ -71,6 +73,9 @@ docker push phelger/smpqwa
 ```
 
 ## News and Noteworthy
+
+2026-01-21
+* Added optional support for the Nemhandel SML configurations. Based on #4
 
 2025-11-17
 * Improved the error handling of the SMP query APIs based on #3 - returning 404 if not found
