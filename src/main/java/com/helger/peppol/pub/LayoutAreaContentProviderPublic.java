@@ -45,8 +45,6 @@ import com.helger.photon.core.menu.MenuItemDeterminatorCallback;
 import com.helger.url.ISimpleURL;
 import com.helger.url.SimpleURL;
 
-
-
 /**
  * The viewport renderer (menu + content area)
  *
@@ -54,6 +52,8 @@ import com.helger.url.SimpleURL;
  */
 public final class LayoutAreaContentProviderPublic
 {
+  private static final String GITHUB_LOCAL = "Helger-IT/smp-query-webapp";
+
   private LayoutAreaContentProviderPublic ()
   {}
 
@@ -66,7 +66,7 @@ public final class LayoutAreaContentProviderPublic
     aNavbar.addBrand (new HCSpan ().addClass (AppCommonUI.CSS_CLASS_LOGO1).addChild (AppHelper.getApplicationTitle ()),
                       aLinkToStartPage);
 
-    final ISimpleURL aURL = new SimpleURL ("https://github.com/phax/smp-query-webapp");
+    final ISimpleURL aURL = new SimpleURL ("https://github.com/" + GITHUB_LOCAL);
     aNavbar.addAndReturnText ().addChild ("Latest version:").addClass (CBootstrapCSS.MR_2);
     aNavbar.addBrand (new HCSpan ().addChild (aURL.getAsString ()), aURL);
 
@@ -142,7 +142,8 @@ public final class LayoutAreaContentProviderPublic
 
       aFooter.addChild (new HCP ().addChild (AppHelper.getApplicationTitle () + " - created by Philip Helger")
                                   .addChild (" - GitHub: ")
-                                  .addChild (new HCA (new SimpleURL ("https://github.com/phax/smp-query-webapp")).addChild ("phax/smp-query-webapp")));
+                                  .addChild (new HCA (new SimpleURL ("https://github.com/" + GITHUB_LOCAL)).addChild (
+                                                                                                                      GITHUB_LOCAL)));
 
       ret.addChild (aFooter);
     }
