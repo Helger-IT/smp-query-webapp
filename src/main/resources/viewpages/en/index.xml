@@ -33,16 +33,14 @@
 
 <h2>Base parameters</h2>
 
-<div>
-  The base URL for all REST queries is <code>https://peppol.helger.com/api</code> - prepend this to all queries.
-</div>
-
 <div class="mt-2">
   If an SML is required, the following SML identifiers are available:
 </div>
 <ul>
   <li><code>digitprod</code> - the production Peppol SML</li>
   <li><code>digittest</code> - the test Peppol SML (aka SMK)</li>
+  <li><code>nemhandelprod</code> - the production Nemhandel SML</li>
+  <li><code>nemhandeltest</code> - the test Nemhandel SML</li>
   <li><code>autodetect</code> - find the matching SML automatically</li>
 </ul>
 

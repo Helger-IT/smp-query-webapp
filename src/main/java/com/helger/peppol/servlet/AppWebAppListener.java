@@ -30,8 +30,12 @@ import com.helger.peppol.app.CPPApp;
 import com.helger.peppol.pub.MenuPublic;
 import com.helger.peppol.rest.PPAPI;
 import com.helger.peppol.secure.MenuSecure;
+import com.helger.peppol.sml.ESMPAPIType;
+import com.helger.peppol.sml.SMLInfo;
 import com.helger.peppol.ui.AppCommonUI;
 import com.helger.peppol.ui.types.mgr.PhotonPeppolMetaManager;
+import com.helger.peppol.ui.types.smlconfig.ISMLConfigurationManager;
+import com.helger.peppolid.factory.ESMPIdentifierType;
 import com.helger.photon.ajax.IAjaxRegistry;
 import com.helger.photon.api.IAPIRegistry;
 import com.helger.photon.bootstrap4.servlet.WebAppListenerBootstrap;
@@ -150,5 +154,35 @@ public final class AppWebAppListener extends WebAppListenerBootstrap
 
     // Setup error handler
     AppInternalErrorHandler.doSetup ();
+
+    // Register specific SML configurations
+    {
+      final ISMLConfigurationManager aSMLConfigMgr = PhotonPeppolMetaManager.getSMLConfigurationMgr ();
+      if (!aSMLConfigMgr.containsSMLInfoWithID ("nemhandeltest"))
+        aSMLConfigMgr.createSMLInfo ("nemhandeltest",
+                                     "Nemhandel Demo",
+                                     "edel.sml-demo.dataudveksling.dk.",
+                                     "https://edel.sml-demo.dataudveksling.dk",
+                                     SMLInfo.DEFAULT_SUFFIX_MANAGE_SMP,
+                                     SMLInfo.DEFAULT_SUFFIX_MANAGE_PARTICIPANT,
+                                     true,
+                                     ESMPAPIType.PEPPOL,
+                                     ESMPIdentifierType.SIMPLE,
+                                     false,
+                                     200);
+
+      if (!aSMLConfigMgr.containsSMLInfoWithID ("nemhandelprod"))
+        aSMLConfigMgr.createSMLInfo ("nemhandelprod",
+                                     "Nemhandel Production",
+                                     "edel.sml.dataudveksling.dk.",
+                                     "https://edel.sml.dataudveksling.dk",
+                                     SMLInfo.DEFAULT_SUFFIX_MANAGE_SMP,
+                                     SMLInfo.DEFAULT_SUFFIX_MANAGE_PARTICIPANT,
+                                     true,
+                                     ESMPAPIType.PEPPOL,
+                                     ESMPIdentifierType.SIMPLE,
+                                     true,
+                                     300);
+    }
   }
 }
