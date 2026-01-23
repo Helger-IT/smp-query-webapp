@@ -165,31 +165,31 @@ public final class AppWebAppListener extends WebAppListenerBootstrap
       LOGGER.info ("Registering Nemhandel SML configurations");
 
       final ISMLConfigurationManager aSMLConfigMgr = PhotonPeppolMetaManager.getSMLConfigurationMgr ();
-      if (!aSMLConfigMgr.containsSMLInfoWithID ("nemhandeltest"))
-        aSMLConfigMgr.createSMLInfo ("nemhandeltest",
-                                     "Nemhandel Demo",
-                                     "edel.sml-demo.dataudveksling.dk.",
-                                     "https://edel.sml-demo.dataudveksling.dk",
-                                     SMLInfo.DEFAULT_SUFFIX_MANAGE_SMP,
-                                     SMLInfo.DEFAULT_SUFFIX_MANAGE_PARTICIPANT,
-                                     true,
-                                     ESMPAPIType.PEPPOL,
-                                     ESMPIdentifierType.SIMPLE,
-                                     false,
-                                     200);
+      if (!aSMLConfigMgr.containsSMLConfigurationWithID ("nemhandeltest"))
+        aSMLConfigMgr.createSMLConfiguration ("nemhandeltest",
+                                              "Nemhandel Demo",
+                                              "edel.sml-demo.dataudveksling.dk.",
+                                              "https://edel.sml-demo.dataudveksling.dk",
+                                              SMLInfo.DEFAULT_SUFFIX_MANAGE_SMP,
+                                              SMLInfo.DEFAULT_SUFFIX_MANAGE_PARTICIPANT,
+                                              true,
+                                              ESMPAPIType.PEPPOL,
+                                              ESMPIdentifierType.SIMPLE,
+                                              false,
+                                              200);
 
-      if (!aSMLConfigMgr.containsSMLInfoWithID ("nemhandelprod"))
-        aSMLConfigMgr.createSMLInfo ("nemhandelprod",
-                                     "Nemhandel Production",
-                                     "edel.sml.dataudveksling.dk.",
-                                     "https://edel.sml.dataudveksling.dk",
-                                     SMLInfo.DEFAULT_SUFFIX_MANAGE_SMP,
-                                     SMLInfo.DEFAULT_SUFFIX_MANAGE_PARTICIPANT,
-                                     true,
-                                     ESMPAPIType.PEPPOL,
-                                     ESMPIdentifierType.SIMPLE,
-                                     true,
-                                     300);
+      if (!aSMLConfigMgr.containsSMLConfigurationWithID ("nemhandelprod"))
+        aSMLConfigMgr.createSMLConfiguration ("nemhandelprod",
+                                              "Nemhandel Production",
+                                              "edel.sml.dataudveksling.dk.",
+                                              "https://edel.sml.dataudveksling.dk",
+                                              SMLInfo.DEFAULT_SUFFIX_MANAGE_SMP,
+                                              SMLInfo.DEFAULT_SUFFIX_MANAGE_PARTICIPANT,
+                                              true,
+                                              ESMPAPIType.PEPPOL,
+                                              ESMPIdentifierType.SIMPLE,
+                                              true,
+                                              300);
     }
   }
 }
