@@ -20,7 +20,7 @@ A prebuild Docker image is available on Docker Hub as `phelger/smpqwa:latest` (f
 
 See the Wiki page https://github.com/Helger-IT/smp-query-webapp/wiki/REST-API for the full API description.
 
-Supported SML servers are `digittest` (Peppol SMK), `digitprod` (Peppol SML) and `autodetect` (automatic detection).
+Supported SML servers are `peppoltest` (Peppol T-SML), `peppolprod` (Peppol SML) and `autodetect` (automatic detection).
 Additionally SML servers `nemhandeltest` (Nemhandel Test SML) and `nemhandelprod` (Nemhandel Prod SML) can be enabled via configuration property `nemhandel.support.enabled`.
 
 ## Configuration parameters
@@ -76,6 +76,8 @@ docker push phelger/smpqwa
 
 2026-03-20
 * All lookups can use the Peppol SML instead of the EC SML
+* Replace the SML ID `digittest` with `peppoltest`
+* Replace the SML ID `digitprod` with `peppolprod`
 
 2026-01-21
 * Added optional support for the Nemhandel SML configurations. Based on #4
