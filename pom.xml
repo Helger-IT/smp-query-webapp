@@ -183,6 +183,9 @@
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <targetPath>${project.build.directory}/classes</targetPath>
+        <excludes>
+          <exclude>private-*.properties</exclude>
+        </excludes>
       </resource>
       <resource>
         <directory>${basedir}/src/main/webapp</directory>

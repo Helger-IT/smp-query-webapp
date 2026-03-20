@@ -1,8 +1,9 @@
-.classpath
-.project
+.claude/
 .settings/
-
 target/
 local-data/
+
+.classpath
+.project
 
 private-*.properties

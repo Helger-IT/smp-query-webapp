@@ -75,7 +75,7 @@ docker push phelger/smpqwa
 ## News and Noteworthy
 
 2026-03-20
-* All lookups use the Peppol SML instead of the EC SML
+* All lookups can use the Peppol SML instead of the EC SML
 
 2026-01-21
 * Added optional support for the Nemhandel SML configurations. Based on #4
