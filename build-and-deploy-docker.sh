@@ -18,11 +18,8 @@
 
 mvn clean install
 
-echo Docker login
-docker login -u phelger
-
-echo Starting buildx
-##docker buildx create --name smpqwa --append
+#echo Docker login
+#echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
 
 docker buildx build --platform=linux/amd64 --push --pull -t phelger/smpqwa .
 docker buildx build --platform=linux/arm64 --push --pull -t phelger/smpqwa-arm64 .
