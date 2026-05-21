@@ -60,7 +60,7 @@ public class StatusXServletHandler implements IXServletSimpleHandler
     aStatusData.addIfNotNull ("startup.datetime",
                               PDTWebDateHelper.getAsStringXSD (AppWebAppListener.getStartupDateTime ()));
     aStatusData.add ("status.datetime", PDTWebDateHelper.getAsStringXSD (PDTFactory.getCurrentOffsetDateTimeUTC ()));
-    aStatusData.add ("version.pp", AppVersion.getVersionNumber ());
+    aStatusData.add ("version.smpqwa", AppVersion.getVersionNumber ());
     aStatusData.add ("version.java", SystemProperties.getJavaVersion ());
     aStatusData.add ("global.debug", GlobalDebug.isDebugMode ());
     aStatusData.add ("global.production", GlobalDebug.isProductionMode ());
