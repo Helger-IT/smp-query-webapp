@@ -82,4 +82,13 @@
     <servlet-name>PingPongServlet</servlet-name>
     <url-pattern>/ping/*</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StatusServlet</servlet-name>
+    <servlet-class>com.helger.peppol.servlet.StatusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StatusServlet</servlet-name>
+    <url-pattern>/status/*</url-pattern>
+  </servlet-mapping>
 </web-app>

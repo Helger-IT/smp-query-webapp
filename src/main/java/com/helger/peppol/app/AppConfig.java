@@ -70,4 +70,9 @@ public final class AppConfig extends AbstractGlobalSingleton
   {
     return getConfig ().getAsBoolean ("nemhandel.support.enabled", false);
   }
+
+  public static boolean isStatusAPIEnabled ()
+  {
+    return getConfig ().getAsBoolean ("smpqwa.statusapi.enabled", true);
+  }
 }

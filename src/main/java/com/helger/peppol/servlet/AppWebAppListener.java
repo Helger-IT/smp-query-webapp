@@ -16,12 +16,16 @@
  */
 package com.helger.peppol.servlet;
 
+import java.time.OffsetDateTime;
+
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.helger.commons.vendor.VendorInfo;
+import com.helger.datetime.helper.PDTFactory;
 import com.helger.dns.config.DNSConfig;
 import com.helger.httpclient.HttpDebugger;
 import com.helger.peppol.api.ajax.CPeppolSharedAjax;
@@ -58,6 +62,14 @@ public final class AppWebAppListener extends WebAppListenerBootstrap
 {
   private static final Logger LOGGER = LoggerFactory.getLogger (AppWebAppListener.class);
 
+  private static OffsetDateTime s_aStartupDateTime;
+
+  @Nullable
+  public static OffsetDateTime getStartupDateTime ()
+  {
+    return s_aStartupDateTime;
+  }
+
   @Override
   protected String getInitParameterDebug (@NonNull final ServletContext aSC)
   {
@@ -85,6 +97,8 @@ public final class AppWebAppListener extends WebAppListenerBootstrap
   @Override
   protected void initGlobalSettings ()
   {
+    s_aStartupDateTime = PDTFactory.getCurrentOffsetDateTimeUTC ();
+
     // Disable DNS caching
     DNSConfig.setDNSCacheTime (0);
     HttpDebugger.setEnabled (false);

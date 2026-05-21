@@ -14,25 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.peppol.jetty;
+package com.helger.peppol.servlet;
 
-import com.helger.annotation.concurrent.Immutable;
-import com.helger.photon.jetty.JettyStarter;
+import com.helger.http.EHttpMethod;
+import com.helger.xservlet.AbstractXServlet;
 
 /**
- * Run peppol-practical as a standalone web application in Jetty on port 8080. <br>
- * http://localhost:8080/
+ * The servlet to show the application status.
  *
  * @author Philip Helger
  */
-@Immutable
-public final class RunInJettySMPQWA
+public class StatusServlet extends AbstractXServlet
 {
-  public static void main (final String [] args) throws Exception
+  public static final String SERVLET_DEFAULT_NAME = "status";
+  public static final String SERVLET_DEFAULT_PATH = '/' + SERVLET_DEFAULT_NAME;
+
+  public StatusServlet ()
   {
-    // Set here, to avoid that private-application.properties is needed, which would be packaged in
-    // Docker image
-    System.setProperty ("webapp.datapath", "generated/");
-    new JettyStarter (RunInJettySMPQWA.class).run ();
+    handlerRegistry ().registerHandler (EHttpMethod.GET, new StatusXServletHandler ());
+    handlerRegistry ().unregisterHandler (EHttpMethod.OPTIONS);
   }
 }

@@ -1,9 +1,9 @@
 .claude/
 .settings/
+generated/
 target/
-local-data/
 
 .classpath
+.DS_Store
 .project
-
-private-*.properties
+zz

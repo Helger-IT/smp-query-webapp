@@ -181,11 +181,22 @@
 
   <build>
     <resources>
+      <!-- Hack to filter only properties files -->
       <resource>
-        <directory>${basedir}/src/main/resources</directory>
-        <targetPath>${project.build.directory}/classes</targetPath>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
         <excludes>
           <exclude>private-*.properties</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <excludes>
+          <exclude>**/*.properties</exclude>
         </excludes>
       </resource>
       <resource>
@@ -197,8 +208,5 @@
         <targetPath>${project.build.directory}/test-classes</targetPath>
       </resource>
     </resources>
-    
-    <plugins>
-   </plugins>
   </build>
 </project>

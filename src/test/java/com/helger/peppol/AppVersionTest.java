@@ -14,25 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.peppol.jetty;
+package com.helger.peppol;
 
-import com.helger.annotation.concurrent.Immutable;
-import com.helger.photon.jetty.JettyStarter;
+import static org.junit.Assert.assertNotNull;
 
-/**
- * Run peppol-practical as a standalone web application in Jetty on port 8080. <br>
- * http://localhost:8080/
- *
- * @author Philip Helger
- */
-@Immutable
-public final class RunInJettySMPQWA
+import org.junit.Test;
+
+import com.helger.peppol.app.AppVersion;
+
+public final class AppVersionTest
 {
-  public static void main (final String [] args) throws Exception
+  @Test
+  public void testBasic () throws Exception
   {
-    // Set here, to avoid that private-application.properties is needed, which would be packaged in
-    // Docker image
-    System.setProperty ("webapp.datapath", "generated/");
-    new JettyStarter (RunInJettySMPQWA.class).run ();
+    assertNotNull (AppVersion.getVersionNumber ());
+    assertNotNull (AppVersion.getBuildTimestamp ());
   }
 }
