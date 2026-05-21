@@ -73,4 +73,13 @@
     <servlet-name>AppRootServlet</servlet-name>
     <url-pattern></url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>PingPongServlet</servlet-name>
+    <servlet-class>com.helger.photon.core.servlet.PingPongServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PingPongServlet</servlet-name>
+    <url-pattern>/ping/*</url-pattern>
+  </servlet-mapping>
 </web-app>

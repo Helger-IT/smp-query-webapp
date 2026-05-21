@@ -20,8 +20,7 @@ import com.helger.annotation.concurrent.Immutable;
 import com.helger.photon.jetty.JettyStarter;
 
 /**
- * Run peppol-practical as a standalone web application in Jetty on port 8080.
- * <br>
+ * Run peppol-practical as a standalone web application in Jetty on port 8080. <br>
  * http://localhost:8080/
  *
  * @author Philip Helger
@@ -31,6 +30,7 @@ public final class RunInJettySMPQWA
 {
   public static void main (final String [] args) throws Exception
   {
+    System.setProperty ("webapp.datapath", "local-data/");
     new JettyStarter (RunInJettySMPQWA.class).run ();
   }
 }
