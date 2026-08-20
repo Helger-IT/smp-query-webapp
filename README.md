@@ -74,6 +74,10 @@ docker push phelger/smpqwa
 
 ## News and Noteworthy
 
+2026-08-20
+* The Docker image is now based on `tomcat:10.1-jre25` instead of `tomcat:10-jdk21`
+* Enabled native access for Tomcat on JDK 25 via `--enable-native-access=ALL-UNNAMED`
+
 2026-03-20
 * All lookups can use the Peppol SML instead of the EC SML
 * Replace the SML ID `digittest` with `peppoltest`
