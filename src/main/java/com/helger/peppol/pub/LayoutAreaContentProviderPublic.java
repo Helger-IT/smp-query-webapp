@@ -27,12 +27,12 @@ import com.helger.html.hc.html.textlevel.HCSpan;
 import com.helger.html.hc.impl.HCNodeList;
 import com.helger.peppol.app.AppHelper;
 import com.helger.peppol.ui.AppCommonUI;
-import com.helger.photon.bootstrap4.CBootstrapCSS;
-import com.helger.photon.bootstrap4.layout.BootstrapContainer;
-import com.helger.photon.bootstrap4.navbar.BootstrapNavbar;
-import com.helger.photon.bootstrap4.uictrls.ext.BootstrapMenuItemRenderer;
-import com.helger.photon.bootstrap4.uictrls.ext.BootstrapMenuItemRendererHorz;
-import com.helger.photon.bootstrap4.uictrls.ext.BootstrapPageRenderer;
+import com.helger.photon.bootstrap5.CBootstrapCSS;
+import com.helger.photon.bootstrap5.layout.BootstrapContainer;
+import com.helger.photon.bootstrap5.navbar.BootstrapNavbar;
+import com.helger.photon.bootstrap5.uictrls.ext.BootstrapMenuItemRenderer;
+import com.helger.photon.bootstrap5.uictrls.ext.BootstrapMenuItemRendererHorz;
+import com.helger.photon.bootstrap5.uictrls.ext.BootstrapPageRenderer;
 import com.helger.photon.core.execcontext.ILayoutExecutionContext;
 import com.helger.photon.core.execcontext.LayoutExecutionContext;
 import com.helger.photon.core.html.CLayout;
@@ -67,7 +67,7 @@ public final class LayoutAreaContentProviderPublic
                       aLinkToStartPage);
 
     final ISimpleURL aURL = new SimpleURL ("https://github.com/" + GITHUB_LOCAL);
-    aNavbar.addAndReturnText ().addChild ("Latest version:").addClass (CBootstrapCSS.MR_2);
+    aNavbar.addAndReturnText ().addChild ("Latest version:").addClass (CBootstrapCSS.ME_2);
     aNavbar.addBrand (new HCSpan ().addChild (aURL.getAsString ()), aURL);
 
     return aNavbar;
@@ -123,7 +123,7 @@ public final class LayoutAreaContentProviderPublic
     {
       final HCDiv aRow = aOuterContainer.addAndReturnChild (new HCDiv ().addClass (CBootstrapCSS.D_MD_FLEX));
       final HCDiv aCol1 = aRow.addAndReturnChild (new HCDiv ().addClass (CBootstrapCSS.D_MD_FLEX));
-      final HCDiv aCol2 = aRow.addAndReturnChild (new HCDiv ().addClass (CBootstrapCSS.ML_3)
+      final HCDiv aCol2 = aRow.addAndReturnChild (new HCDiv ().addClass (CBootstrapCSS.MS_3)
                                                               .addClass (CBootstrapCSS.FLEX_FILL));
 
       // left
