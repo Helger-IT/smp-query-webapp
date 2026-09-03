@@ -74,6 +74,9 @@ docker push phelger/smpqwa
 
 ## News and Noteworthy
 
+v1.0.0 - 2026-09-03
+* Starting releases
+
 2026-08-20
 * The Docker image is now based on `tomcat:10.1-jre25` instead of `tomcat:10-jdk21`
 * Enabled native access for Tomcat on JDK 25 via `--enable-native-access=ALL-UNNAMED`

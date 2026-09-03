@@ -25,7 +25,7 @@ RUN apt-get update \
   && apt-get install -y unzip \
   && rm -rf /var/lib/apt/lists/*
 
-COPY target/*.war ./phax.war
+COPY target/checkout/target/*.war ./phax.war
 
 RUN unzip phax.war -d /phax
 
