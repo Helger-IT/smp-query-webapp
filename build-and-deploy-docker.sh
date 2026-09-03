@@ -16,10 +16,10 @@
 # limitations under the License.
 #
 
-mvn clean install
+version=1.0.0
 
 #echo Docker login
 #echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
 
-docker buildx build --platform=linux/amd64 --push --pull -t phelger/smpqwa .
-docker buildx build --platform=linux/arm64 --push --pull -t phelger/smpqwa-arm64 .
+docker buildx build --platform=linux/amd64 --push --pull -t phelger/smpqwa:$version       -t phelger/smpqwa:latest     .
+docker buildx build --platform=linux/arm64 --push --pull -t phelger/smpqwa-arm64:$version -t phelger/smpqwa-arm64:latest .
