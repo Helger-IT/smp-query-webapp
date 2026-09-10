@@ -32,8 +32,6 @@ import com.helger.photon.core.smtp.NamedSMTPSettings;
 import com.helger.smtp.settings.ISMTPSettings;
 import com.helger.web.scope.IRequestWebScopeWithoutResponse;
 
-
-
 public final class AppInternalErrorHandler extends AbstractErrorCallback
 {
   @Override
@@ -57,7 +55,8 @@ public final class AppInternalErrorHandler extends AbstractErrorCallback
     final NamedSMTPSettings aNamedSettings = PhotonCoreManager.getSMTPSettingsMgr ()
                                                               .getSettings (CNamedSMTPSettings.NAMED_SMTP_SETTINGS_DEFAULT_ID);
     final ISMTPSettings aSMTPSettings = aNamedSettings == null ? null : aNamedSettings.getSMTPSettings ();
-    InternalErrorSettings.setSMTPSenderAddress (new EmailAddress ("peppol@helger.com", "peppol.helger.com application"));
+    InternalErrorSettings.setSMTPSenderAddress (new EmailAddress ("peppol@helger.com",
+                                                                  "peppol.helger.com application"));
     InternalErrorSettings.setSMTPReceiverAddress (new EmailAddress ("philip@helger.com", "Philip"));
     InternalErrorSettings.setSMTPSettings (aSMTPSettings);
     InternalErrorSettings.setFallbackLocale (CPPApp.DEFAULT_LOCALE);
