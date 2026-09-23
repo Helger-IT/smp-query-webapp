@@ -74,6 +74,9 @@ docker push phelger/smpqwa
 
 ## News and Noteworthy
 
+v1.0.1 - 2026-09-24
+* Updated to peppol-commons v13.0.0
+
 v1.0.0 - 2026-09-03
 * Starting releases
 

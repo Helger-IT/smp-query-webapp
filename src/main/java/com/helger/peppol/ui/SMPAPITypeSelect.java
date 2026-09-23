@@ -20,7 +20,7 @@ import java.util.Locale;
 
 import org.jspecify.annotations.NonNull;
 
-import com.helger.peppol.sml.ESMPAPIType;
+import com.helger.edelivery.smp.ESMPAPIType;
 import com.helger.photon.core.form.RequestField;
 import com.helger.photon.uicore.html.select.HCExtSelect;
 
