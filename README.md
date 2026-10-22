@@ -81,6 +81,15 @@ docker push phelger/smpqwa
 
 ## News and Noteworthy
 
+v1.0.2 - 2026-10-22
+* **Security: the Docker image now blocks the 16 compromised eMudhra intermediate CA certificates.**
+  The private keys of 8 eMudhra intermediate CAs were compromised, and each of them is also cross-signed by Sectigo's AAA Certificate Services, which is still trusted by the JDK.
+  The Java runtime does not check revocation by default, so outbound HTTPS connections relying on the JDK trust store could accept forged certificates.
+  The `Dockerfile` now appends the SHA-256 hashes of all 16 certificates to the JDK `blocked.certs` file.
+  The step is skipped if the base image already contains the entries.
+  Existing deployments must pull the new image, or add the hashes to the `blocked.certs` file of their own JDK.
+  See [phoss-ap #115](https://github.com/phax/phoss-ap/issues/115)
+
 v1.0.1 - 2026-09-24
 * Updated to peppol-commons v13.0.0
 
