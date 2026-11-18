@@ -19,13 +19,16 @@
 
 FROM ubuntu:latest AS build
 
+# The released version to package - the WAR is taken from the GitHub release page
+ARG VERSION
+
 # Install unzip
 RUN apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y unzip \
   && rm -rf /var/lib/apt/lists/*
 
-COPY target/checkout/target/*.war ./phax.war
+ADD https://github.com/Helger-IT/smp-query-webapp/releases/download/smp-query-webapp-${VERSION}/smp-query-webapp-${VERSION}.war ./phax.war
 
 RUN unzip phax.war -d /phax
 

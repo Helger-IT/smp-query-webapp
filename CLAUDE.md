@@ -19,8 +19,8 @@ mvn test -pl . -Dtest=com.helger.peppol.jetty.RunInJettySMPQWA
 # Run tests
 mvn test
 
-# Docker build
-docker build -t phelger/smpqwa .
+# Docker build (WAR is downloaded from the GitHub release of that version)
+docker build --build-arg VERSION=1.0.2 -t phelger/smpqwa .
 ```
 
 ## Architecture

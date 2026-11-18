@@ -21,5 +21,5 @@ version=1.0.2
 #echo Docker login
 #echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
 
-docker buildx build --platform=linux/amd64 --push --pull -t phelger/smpqwa:$version       -t phelger/smpqwa:latest     .
-docker buildx build --platform=linux/arm64 --push --pull -t phelger/smpqwa-arm64:$version -t phelger/smpqwa-arm64:latest .
+docker buildx build --platform=linux/amd64 --push --pull --build-arg VERSION=$version -t phelger/smpqwa:$version       -t phelger/smpqwa:latest     .
+docker buildx build --platform=linux/arm64 --push --pull --build-arg VERSION=$version -t phelger/smpqwa-arm64:$version -t phelger/smpqwa-arm64:latest .

@@ -56,10 +56,10 @@ mvn clean install
 
 Output: `target/*.war`
 
-Afterwards build Docker image:
+Build the Docker image from a released version (the WAR file is taken from the GitHub release page):
 
 ```
-docker build --pull -t phelger/smpqwa .
+docker build --pull --build-arg VERSION=1.0.2 -t phelger/smpqwa .
 ```
 
 ## Running
@@ -80,6 +80,9 @@ docker push phelger/smpqwa
 ```
 
 ## News and Noteworthy
+
+v1.0.3 - work in progress
+* The `Dockerfile` now takes the WAR file from the GitHub release page instead of the local `target` folder, so that Docker builds are deterministic. The version to package is passed via `--build-arg VERSION=x.y.z`.
 
 v1.0.2 - 2026-10-22
 * **Security: the Docker image now blocks the 16 compromised eMudhra intermediate CA certificates.**
