@@ -82,6 +82,7 @@ docker push phelger/smpqwa
 ## News and Noteworthy
 
 v1.0.3 - work in progress
+* **Security: the Docker image disables the HotSpot Base64 intrinsic (`-XX:-UseBASE64Intrinsics`) as mitigation for CVE-2026-114938 ("Java2Shell").**
 * The `Dockerfile` now takes the WAR file from the GitHub release page instead of the local `target` folder, so that Docker builds are deterministic. The version to package is passed via `--build-arg VERSION=x.y.z`.
 
 v1.0.2 - 2026-10-22
